@@ -13,7 +13,6 @@
     "rootDir": "./src",
     "outDir": "./lib",
     "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
     "paths": {
       "@fooddelivery/activities": ["../../packages/activities/index"]
     }

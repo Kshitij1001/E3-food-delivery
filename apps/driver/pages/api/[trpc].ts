@@ -17,8 +17,8 @@ export const appRouter = t.router({
     .mutation(async ({ input: orderId, ctx }) => ctx.temporal.workflow.getHandle(orderId).signal(deliveredSignal)),
 
   getOrders: t.procedure.input(z.undefined()).query(async ({ ctx }) => {
-    const list = await ctx.temporal.workflow.list({
-      query: 'WorkflowType = "order"',
+    const list = ctx.temporal.workflow.list({
+      query: 'WorkflowType = "foodOrderWorkflow"',
     })
 
     const promises: Promise<OrderStatusWithOrderId>[] = []

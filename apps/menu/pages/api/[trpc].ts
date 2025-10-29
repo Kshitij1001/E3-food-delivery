@@ -3,7 +3,7 @@ import * as trpcNext from '@trpc/server/adapters/next'
 import { z } from 'zod'
 import { taskQueue } from '@fooddelivery/common'
 import { Context, createContext } from '@fooddelivery/common/trpc-context'
-import { getStatusQuery, order } from '@fooddelivery/workflows'
+import { getStatusQuery, foodOrderWorkflow } from '@fooddelivery/workflows'
 import type {} from '@temporalio/client'
 
 const t = initTRPC.context<Context>().create()
@@ -12,7 +12,7 @@ export const appRouter = t.router({
   createOrder: t.procedure
     .input(z.object({ productId: z.number(), orderId: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      await ctx.temporal.workflow.start(order, {
+      await ctx.temporal.workflow.start(foodOrderWorkflow, {
         workflowId: input.orderId,
         args: [input.productId],
         taskQueue,

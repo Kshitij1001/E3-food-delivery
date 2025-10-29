@@ -139,7 +139,7 @@ class FoodOrderWorkflow {
   }
 }
 
-export async function order(productId: number): Promise<string> {
+export async function foodOrderWorkflow(productId: number): Promise<string> {
   const workflow = new FoodOrderWorkflow(productId)
   return await workflow.executeWorkflow()
 }
